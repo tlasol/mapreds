@@ -25,6 +25,9 @@
         <module name="mapr" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="mapr" target="1.6" />
+    </bytecodeTargetLevel>
   </component>
 </project>
 
