@@ -22,11 +22,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="mapr" />
+        <module name="mapreds" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="mapr" target="1.6" />
+      <module name="mapreds" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>
