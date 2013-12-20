@@ -1,15 +1,14 @@
-package org.myorg;
-
-import java.io.IOException;
-import java.util.*;
+package src.main.org.mary.mapr;
 
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.conf.*;
 import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapred.*;
-import org.apache.hadoop.util.*;
 
-    public class WordCount {
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.StringTokenizer;
+
+public class WordCount {
 
         public static class Map extends MapReduceBase implements Mapper<LongWritable, Text, Text, IntWritable> {
             private final static IntWritable one = new IntWritable(1);
@@ -17,7 +16,7 @@ import org.apache.hadoop.util.*;
 
                 public void map(LongWritable key, Text value, OutputCollector<Text, IntWritable> output, Reporter reporter) throws IOException {
                     String line = value.toString();
-                    StringTokenizer tokenizer = new StringTokenizer(line);
+                    StringTokenizer tokenizer = new StringTokenizer(line, " \t\n\r,-");
                     while (tokenizer.hasMoreTokens()) {
                         word.set(tokenizer.nextToken());
                         output.collect(word, one);
