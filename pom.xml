@@ -26,7 +26,7 @@
                     <source>1.6</source>
                     <target>1.6</target>
                     <includes>
-                        <include>src.main.resources.WordCount</include>
+                        <include>com/mary/mapr/*</include>
                     </includes>
                 </configuration>
             </plugin>
@@ -38,7 +38,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.mary.core.WordCount</mainClass>
+                            <mainClass>com.mary.mapr.WordCount</mainClass>
                             <classpathPrefix>dependency-jars/</classpathPrefix>
                         </manifest>
                     </archive>
