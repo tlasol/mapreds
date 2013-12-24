@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4340c4c5-ad39-4cdd-a819-dba4c20184de" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\tlasol\Documents\GitHub\mapreds\src\main\java\com\mary\core\WordCount.java" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\tlasol\Documents\GitHub\mapreds\src\main\resources\WordCount.java" afterPath="$PROJECT_DIR$/src/main/java/com/mary/mapr/WordCount.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/mary/mapr/WordCount.java" afterPath="$PROJECT_DIR$/src/main/java/com/mary/mapr/WordCount.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mapr.iws" />
@@ -69,19 +67,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="pom.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="47" selection-start="1026" selection-end="1026" vertical-scroll-proportion="0.86734694" vertical-offset="51" max-vertical-offset="1037">
+            <state line="35" column="57" selection-start="1264" selection-end="1264" vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="1037">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WordCount.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="WordCount.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/mary/mapr/WordCount.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="0" selection-start="1407" selection-end="1407" vertical-scroll-proportion="0.0" vertical-offset="308" max-vertical-offset="1037">
+            <state line="20" column="24" selection-start="778" selection-end="778" vertical-scroll-proportion="0.5345912" vertical-offset="0" max-vertical-offset="1020">
               <folding />
             </state>
           </provider>
@@ -111,8 +109,8 @@
         <option value="$PROJECT_DIR$/src/main/resources/WordCount1.java" />
         <option value="$PROJECT_DIR$/src/main/resources/WordCount.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mary/core/WordCount.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mary/mapr/WordCount.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/mary/mapr/WordCount.java" />
       </list>
     </option>
   </component>
@@ -585,15 +583,15 @@
       <updated>1380282645923</updated>
       <workItem from="1387460817770" duration="2600000" />
       <workItem from="1387464692159" duration="13200000" />
-      <workItem from="1387894323047" duration="510000" />
+      <workItem from="1387894323047" duration="3097000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16310000" />
+    <option name="totallyTimeSpent" value="18897000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -693,16 +691,16 @@
         <state line="52" column="41" selection-start="1168" selection-end="1567" vertical-scroll-proportion="0.45102042" vertical-offset="663" max-vertical-offset="1513" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mary/mapr/WordCount.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="0" selection-start="1407" selection-end="1407" vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="952">
+        <state line="35" column="57" selection-start="1264" selection-end="1264" vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="1037">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mary/mapr/WordCount.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="47" selection-start="1026" selection-end="1026" vertical-scroll-proportion="0.86734694" vertical-offset="51" max-vertical-offset="1037">
+        <state line="20" column="24" selection-start="778" selection-end="778" vertical-scroll-proportion="0.5345912" vertical-offset="0" max-vertical-offset="1020">
           <folding />
         </state>
       </provider>
