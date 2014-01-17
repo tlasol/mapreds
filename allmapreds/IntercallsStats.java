@@ -20,9 +20,8 @@ public class MapReduce {
             String line = value.toString();
             String[] nums = new String[2];
             StringTokenizer tokenizer = new StringTokenizer(line, ";\n");
-            String callCode = "";
-            boolean whichCall = false;                     // false - caller
-            while (tokenizer.hasMoreTokens()) {            // true - destination
+            String callType = "";
+            while (tokenizer.hasMoreTokens()) {
                 switch (counter){
                     case 0:
                         nums[0] = word.toString();
@@ -35,36 +34,43 @@ public class MapReduce {
                 }
                 counter++;
             }
-            callCode = WhatKindOfCode(nums[0], nums[1], whichCall);
-            word.set(callCode);
+            callType = WhatKindOfCall(nums[0], nums[1]);
+            word.set(callType);
             output.collect(word, one);
         }
 
-        private String WhatKindOfCode(String caller, String destination, boolean whichCall) {
+        private String WhatKindOfCall(String caller, String destination) {
             boolean callerStatus = false;        //true - international, false - interurban
             boolean destinationStatus = false;
             String callerCode = "";
             String destinationCode = "";
             for ( int i = 0; i < interurbanCodes.length; i++){
                 if (caller.contains(interurbanCodes[i])){
+                    callerStatus = false;
                     callerCode = interurbanCodes[i];
                 }
                 if (destination.contains(interurbanCodes[i])){
+                    destinationStatus = false;
                     destinationCode = interurbanCodes[i];
                 }
             }
             for ( int j = 0; j < internationalCodes.length; j++){
                 if (caller.contains(internationalCodes[j])){
+                    callerStatus = true;
                     callerCode = internationalCodes[j];
                 }
                 if (destination.contains(internationalCodes[j])){
+                    destinationStatus = true;
                     destinationCode = internationalCodes[j];
                 }
             }
-            if ( whichCall ){
-                return destinationCode;
+            if ( callerStatus == destinationStatus ){
+                if ( callerCode.equals(destinationCode) ){
+                    return "samecode";
+                }
+                else return "interurban";
             }
-            return callerCode;
+            else return "international";
         }
     }
 

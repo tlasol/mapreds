@@ -39,7 +39,7 @@ public class InformationString {
     private Integer callCompare(String start, String end) {
         String startCode = "";
         String endCode = "";
-        
+
 
         return null;
     }
