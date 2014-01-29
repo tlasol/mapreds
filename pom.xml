@@ -27,6 +27,7 @@
                     <target>1.6</target>
                     <includes>
                         <include>com/mary/mapr/*</include>
+                        <include>com/mary/mapr/reports/*</include>
                     </includes>
                 </configuration>
             </plugin>

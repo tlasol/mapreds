@@ -1,31 +1,76 @@
 package com.mary.mapr;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.*;
 
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapred.*;
+
 
 public class MapReduce {
 
     public static class Map extends MapReduceBase implements Mapper<LongWritable, Text, Text, IntWritable> {
         private final static IntWritable one = new IntWritable(1);
         private Text word = new Text();
-        private int counter = 0;
+        String[] interurbanCodes = {"351","342","345","349","343"};
+        String[] internationalCodes = {"1038044","1037517","1099871","101212","104930"};
 
         public void map(LongWritable key, Text value, OutputCollector<Text, IntWritable> output, Reporter reporter) throws IOException {
             String line = value.toString();
-            String[] stringLine = new String[4];
-            StringTokenizer tokenizer = new StringTokenizer(line, ";\n");
+            String[] nums = new String[2];
+            StringTokenizer tokenizer = new StringTokenizer(line, ",;\n");
+            String callCode = "";
+            boolean whichCall = true;  //true - international, false - interurban
+
+            int counter = 0;
             while (tokenizer.hasMoreTokens()) {
-                stringLine[counter%4] = word.toString();
                 word.set(tokenizer.nextToken());
+                switch (counter){
+                    case 0:
+                        nums[0] = word.toString();
+                        break;
+                    case 1:
+                        nums[1] = word.toString();
+                        break;
+                    default:
+                        break;
+                }
                 counter++;
+                if (counter>3) break;
             }
-            InformationString infostring = new InformationString(stringLine);
-            word.set(infostring.getLength());
+            int i = 1;
+            callCode = WhatKindOfCode(nums[1], whichCall);
+            word.set(callCode);
             output.collect(word, one);
+        }
+
+        private String WhatKindOfCode(String destination, boolean whichCall) {
+            boolean destinationStatus = false;    //true - international, false - interurban
+            String destinationCode = "";
+
+            for ( int m = 0; m < interurbanCodes.length; m++){
+                if (destination.contains(interurbanCodes[m])){
+                    destinationCode = interurbanCodes[m];
+                }
+            }
+            for ( int n = 0; n < internationalCodes.length; n++){
+                if (destination.contains(internationalCodes[n])){
+                    destinationCode = internationalCodes[n];
+                    destinationStatus = true;
+                }
+            }
+
+            if (!whichCall&&destinationStatus){
+                return "international";
+            } else if (whichCall&&!destinationStatus){
+                return "interurban";
+            } else {
+                return destinationCode;
+            }
         }
     }
 
@@ -40,6 +85,7 @@ public class MapReduce {
     }
 
     public static void main(String[] args) throws Exception {
+
         JobConf conf = new JobConf(MapReduce.class);
         conf.setJobName("wordcount");
 
@@ -59,5 +105,3 @@ public class MapReduce {
         JobClient.runJob(conf);
     }
 }
-
-

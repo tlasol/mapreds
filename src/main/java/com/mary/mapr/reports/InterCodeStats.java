@@ -1,17 +1,17 @@
-package com.mary.mapr;
+package com.mary.mapr.reports;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.*;
+import java.util.Iterator;
+import java.util.StringTokenizer;
 
-import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.*;
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.*;
 
 
-public class MapReduce {
+public class InterCodeStats {
 
     public static class Map extends MapReduceBase implements Mapper<LongWritable, Text, Text, IntWritable> {
         private final static IntWritable one = new IntWritable(1);
@@ -24,10 +24,10 @@ public class MapReduce {
             String[] nums = new String[2];
             StringTokenizer tokenizer = new StringTokenizer(line, ",;\n");
             String callCode = "";
+            boolean whichCall = true;  //true - international, false - interurban
 
             int counter = 0;
-            // false - caller
-            while (tokenizer.hasMoreTokens()) {            // true - destination
+            while (tokenizer.hasMoreTokens()) {
                 word.set(tokenizer.nextToken());
                 switch (counter){
                     case 0:
@@ -43,15 +43,13 @@ public class MapReduce {
                 if (counter>3) break;
             }
             int i = 1;
-            callCode = WhatKindOfCode(nums[0], nums[1]);
+            callCode = WhatKindOfCode(nums[1], whichCall);
             word.set(callCode);
             output.collect(word, one);
         }
 
-        private String WhatKindOfCode(String caller, String destination) {
-            boolean callerStatus = false;        //true - international, false - interurban
-            boolean destinationStatus = false;
-            String callerCode = "";
+        private String WhatKindOfCode(String destination, boolean whichCall) {
+            boolean destinationStatus = false;    //true - international, false - interurban
             String destinationCode = "";
 
             for ( int m = 0; m < interurbanCodes.length; m++){
@@ -65,24 +63,13 @@ public class MapReduce {
                     destinationStatus = true;
                 }
             }
-            for ( int m = 0; m < interurbanCodes.length; m++){
-                if (caller.contains(interurbanCodes[m])){
-                    callerCode = interurbanCodes[m];
-                }
-            }
-            for ( int n = 0; n < internationalCodes.length; n++){
-                if (caller.contains(internationalCodes[n])){
-                    callerCode = internationalCodes[n];
-                    callerStatus = true;
-                }
-            }
 
-            if (callerCode.equals(destinationCode)){
-                return "same zone";
-            } else if (destinationStatus){
-                return "international call";
+            if (!whichCall&&destinationStatus){
+                return "international";
+            } else if (whichCall&&!destinationStatus){
+                return "interurban";
             } else {
-                return "interurban call";
+                return destinationCode;
             }
         }
     }
@@ -99,8 +86,8 @@ public class MapReduce {
 
     public static void main(String[] args) throws Exception {
 
-        JobConf conf = new JobConf(MapReduce.class);
-        conf.setJobName("wordcount");
+        JobConf conf = new JobConf(InterCodeStats.class);
+        conf.setJobName("intercodestats");
 
         conf.setOutputKeyClass(Text.class);
         conf.setOutputValueClass(IntWritable.class);
@@ -112,8 +99,8 @@ public class MapReduce {
         conf.setInputFormat(TextInputFormat.class);
         conf.setOutputFormat(TextOutputFormat.class);
 
-        FileInputFormat.setInputPaths(conf, new Path(args[0]));
-        FileOutputFormat.setOutputPath(conf, new Path(args[1]));
+        FileInputFormat.setInputPaths(conf, new Path("/"+args[1]));
+        FileOutputFormat.setOutputPath(conf, new Path("/"+args[2]));
 
         JobClient.runJob(conf);
     }
